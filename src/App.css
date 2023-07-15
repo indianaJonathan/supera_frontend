@@ -4,7 +4,7 @@
   font-family: 'Inter', sans-serif, Arial, Helvetica;
   margin: 0;
   padding: 0;
-  transition: all ease-in-out;
+  transition: all ease-in-out .5s;
 }
 
 .App, .App-dark {
@@ -12,7 +12,6 @@
   min-height: 100vh;
   min-width: 100vw;
   padding: 0;
-  transition: all ease-in-out;
 }
 
 .App {
