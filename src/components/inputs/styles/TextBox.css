@@ -1,0 +1,59 @@
+.textbox {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    max-width: 500px;
+}
+
+.textbox-label {
+    padding: 0px 10px;
+}
+
+.textbox-label-text {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.dark {
+    color: #AAAAAA;
+}
+
+.textbox-area, .textbox-area-dark {
+    border-radius: 1rem;
+    padding: 3px 5px;
+}
+
+.textbox-area {
+    background-color: #EEEEEE;
+}
+
+.textbox-area-dark {
+    background-color: #444444;
+}
+
+.textbox-input, .textbox-input-dark {
+    align-items: center;
+    background-color: rgba(255,255,255,0);
+    border: none;
+    outline: none;
+    width: 15rem;
+}
+
+.textbox-input {
+    color: #101010;
+}
+
+.textbox-input-dark {
+    color: #EEEEEE;
+}
+
+.textbox-error {
+    min-height: 15px;
+}
+
+.textbox-error-text {
+    color: #DD0000;
+    font-size: 0.8rem;
+}

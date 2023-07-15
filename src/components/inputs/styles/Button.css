@@ -1,0 +1,30 @@
+.button {
+    align-items: center;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.1rem;
+    font-weight: bold;
+    justify-content: center;
+    padding: 5px;
+    outline: none;
+}
+
+.primary {
+    background-color: #060478;
+    color: #F4F4F4;
+}
+
+.primary:hover {
+    background-color: #0A07D8;
+}
+
+.secondary {
+    background-color: #AAAAAA;
+    color: #333333;
+}
+
+.secondary:hover {
+    background-color: #999999;
+}

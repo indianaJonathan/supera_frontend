@@ -1,0 +1,62 @@
+.datepicker {
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    max-width: 500px;
+    min-width: 300px;
+}
+
+.datepicker-label {
+    padding: 0px 10px;
+}
+
+.datepicker-label-text {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.dark {
+    color: #AAAAAA;
+}
+
+.datepicker-area, .datepicker-area-dark {
+    border-radius: 1rem;
+    padding: 3px 5px;
+}
+
+.datepicker-area {
+    background-color: #EEEEEE;
+}
+
+.datepicker-area-dark {
+    background-color: #444444;
+}
+
+.datepicker-input, .datepicker-input-dark {
+    align-items: center;
+    background-color: rgba(255,255,255,0);
+    border: none;
+    outline: none;
+    justify-content: space-between;
+    width: 15rem;
+}
+
+.datepicker-input {
+    color: #101010;
+}
+
+.datepicker-input-dark {
+    color: #EEEEEE;
+    color-scheme: dark;
+}
+
+.datepicker-error {
+    min-height: 15px;
+}
+
+.datepicker-error-text {
+    color: #DD0000;
+    font-size: 0.8rem;
+}
