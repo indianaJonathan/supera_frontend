@@ -4,10 +4,14 @@
   font-family: 'Inter', sans-serif, Arial, Helvetica;
   margin: 0;
   padding: 0;
-  transition: all ease-in-out .5s;
+  transition: all ease-in-out .3s;
 }
 
 .App, .App-dark {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  justify-content: flex-start;
   margin: 0;
   min-height: 100vh;
   min-width: 100vw;
@@ -32,6 +36,7 @@
   display: flex;
   flex-direction: column;
   margin: 1px auto;
+  margin-bottom: 2rem;
   width: 900px;
 }
 
@@ -49,4 +54,18 @@
   flex-direction: row-reverse;
   gap: 5px;
   justify-content: flex-start;
+}
+
+.divider {
+  min-height: 1px;
+  background-color: #444444;
+  margin: 0rem 35rem;
+}
+
+.table-item {
+  cursor: pointer;
+}
+
+.table-item:hover {
+  background-color: #FFFFFF;
 }
