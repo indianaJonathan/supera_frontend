@@ -13,7 +13,7 @@ function TextBox ({ onChange, dark, label, value, error, clear }) {
                 <input type="text" className={ `textbox-input${ dark ? '-dark' : '' }` } onChange={ onChange } value={value}/>
                 <div className="clean-button-area">
                     { value && value.length > 0 ?
-                        <button title="Limpar campo" onClick={ clear } className={ `clean-button${ dark ? '-dark': '' }` }>
+                        <button type="button" title="Limpar campo" onClick={ clear } className={ `clean-button${ dark ? '-dark': '' }` }>
                             <AiOutlineClose />
                         </button>
                     :

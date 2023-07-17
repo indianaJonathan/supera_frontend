@@ -81,9 +81,11 @@ function App() {
     const res = await transferencia.getTransfers();
     setTransferList(res.data);
     setFilteredList(res.data);
+    setAmmount(getAmount());
   }
 
   async function handleSubmit (e) {
+    console.log("teje lá");
     e.preventDefault();
     if (!operatorNameError && !startTimeError && !endTimeError) {
       if (operatorName && operatorName !== '' && startTime && endTime) {
@@ -148,7 +150,7 @@ function App() {
               <AiOutlineSearch />
             </Button>
             { operatorName || startTime || endTime ?
-              <Button type="button" style="secondary" dark={ dark } title="Limpar" onClick={ cleanForm }>
+              <Button type="button" style="secondary" dark={ dark } title="Limpar" onClick={ () => cleanForm() }>
                 <AiOutlineClose />
               </Button>
             :

@@ -51,9 +51,9 @@
 
 .buttons {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   gap: 5px;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .divider {
