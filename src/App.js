@@ -165,7 +165,7 @@ function App() {
         <Card label="Saldo no período" value={ periodAmmount } dark={ dark }/>
       </div>
       {
-        transferList && transferList.length > 0 ?
+        filteredList && filteredList.length > 0 ?
           <Table dark={ dark } headers={["Data", "Valor", "Tipo", "Operador"]}>
             { filteredList.map( (item) => {
               return(
