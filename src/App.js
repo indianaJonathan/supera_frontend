@@ -85,7 +85,6 @@ function App() {
   }
 
   async function handleSubmit (e) {
-    console.log("teje lá");
     e.preventDefault();
     if (!operatorNameError && !startTimeError && !endTimeError) {
       if (operatorName && operatorName !== '' && startTime && endTime) {
