@@ -1,10 +1,8 @@
 .table, .table-dark {
-    align-items: flex-start;
     border-radius: 1rem;
-    margin: 2rem 30rem;
+    margin: 2rem auto;
     min-height: 300px;
     min-width: fit-content;
-    justify-content: flex-start;
     padding: 1rem;
     transition: all ease-in-out .3s;
 }
@@ -18,41 +16,39 @@
 }
 
 .table-area {
-    align-items: flex-start;
     flex: 1;
     min-width: fit-content;
-    justify-content: flex-start;
+    overflow: hidden;
     padding: 1rem;
     width: 100%;
 }
 
 .table-header, .table-header-dark {
-    display: flex;
-    flex-direction: row;
     font-size: 1.1rem;
     font-weight: bold;
-    gap: 200px;
-    justify-content: center;
     margin-bottom: 1rem;
+    width: 100%;
+}
+
+.table-header th, .table-header-dark th {
+    margin: 0rem 1rem;
 }
 
 .table-header {
+    background-color: #DDDDDD;
     color: #333333;
 }
 
 .table-header-dark {
+    background-color: #111111;
     color: #AAAAAA;
 }
 
 .table-row, .table-row-dark {
-    align-items: center;
     cursor: pointer;
-    display: flex;
-    flex-direction: row;
     font-size: 1.1rem;
-    gap: 200px;
     overflow: hidden;
-    width: 110%;
+    padding: 0.7rem 0.2rem;
 }
 
 .table-row {
@@ -72,7 +68,7 @@
 }
 
 .table-cell {
+    min-width: 250px;
     text-align: left;
     white-space: nowrap;
-    width: 3rem;
 }

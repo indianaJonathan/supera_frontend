@@ -4,9 +4,9 @@ import React from "react";
 
 function TableCell ({ children }) {
     return (
-        <div className="table-cell">
+        <td className="table-cell">
             { children }
-        </div>
+        </td>
     );
 }
 

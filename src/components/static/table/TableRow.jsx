@@ -4,9 +4,9 @@ import React from "react";
 
 function TableRow ({ children, dark }) {
     return (
-        <div className={ `table-row${ dark ? '-dark' : '' }` }>
+        <tr className={ `table-row${ dark ? '-dark' : '' }` }>
             { children }
-        </div>
+        </tr>
     );
 }
 

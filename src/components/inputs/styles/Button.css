@@ -43,3 +43,7 @@
 .secondary:hover {
     background-color: #999999;
 }
+
+.secondary-dark:hover {
+    background-color: #AAAAAA;
+}

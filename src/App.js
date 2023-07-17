@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import TextBox from './components/inputs/TextBox';
 import Datepicker from './components/inputs/Datepicker';
@@ -8,23 +8,20 @@ import Table from './components/static/table/Table';
 import TableRow from './components/static/table/TableRow';
 import TableCell from './components/static/table/TableCell';
 
-import { AiOutlineSearch } from 'react-icons/ai';
+import transferencia from './services/Transferencia';
+
+import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai';
 import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs';
 
 function App() {
   const [dark, setDark] = useState(false);
   const [operatorName, setOperatorName] = useState("");
   const [startTime, setStartTime] = useState('');
+  const [startTimeError, setStartTimeError] = useState('');
   const [endTime, setEndTime] = useState('');
+  const [endTimeError, setEndTimeError] = useState('');
   const [operatorNameError, setOperatorNameError] = useState('');
-  const [transferList, setTransferList] = useState([
-    {id: 1, data_transferencia: "2023-07-15T16:33:21.000", valor: 3056.64, tipo: "DEPOSITO",  operador: "Jonathan"}, 
-    {id: 2, data_transferencia: "2023-07-16T09:01:55.000", valor: -15.64, tipo: "SAQUE", operador: "Ronnyscley"}, 
-    {id: 3, data_transferencia: "2023-07-21T23:59:59.000", valor: -876.33, tipo: "SAQUE", operador: "Fulano"},
-    {id: 4, data_transferencia: "2023-07-09T03:45:20.000", valor: 1.99, tipo: "DEPOSITO",  operador: "Jonathan"},
-    {id: 5, data_transferencia: "2023-07-16T16:02:07.000", valor: 2.99, tipo: "TRANSFERENCIA",  operador: "Jonathan"}
-  ]);
-  const [filteredList, setFilteredList] = useState(transferList);
+  const [transferList, setTransferList] = useState([]);
 
   function handleThemeChange () {
     setDark(!dark);
@@ -35,6 +32,13 @@ function App() {
   }
 
   function handleEndTime (value, e) {
+    if (value.target.value < startTime) {
+      setEndTimeError("A data final deve ser maior que a data inicial");
+      setEndTime('');
+      return;
+    } else {
+      setEndTimeError(null);
+    }
     setEndTime(value.target.value);
   }
 
@@ -48,77 +52,94 @@ function App() {
     setOperatorName(e.target.value);
   }
 
-  function handleSubmit (e) {
+  async function getTransfers () {
+    const res = await transferencia.getTransfers();
+    setTransferList(res.data);
+    setTransferList(res.data);
+  }
+
+  async function handleSubmit (e) {
     e.preventDefault();
     if (operatorName && operatorName !== '' && startTime && endTime) {
-      setFilteredList(transferList.filter((item) => {
-        if (
-          (item.operador.toUpperCase() === operatorName.toUpperCase()) && 
-          (stringToDate(item.data_transferencia) >= stringToDate(startTime) && stringToDate(item.data_transferencia) <= stringToDate(endTime))
-        ) {
-          return item;
-        }
-      }));
+      const res = await transferencia.getTransfersByAllFilters(startTime, endTime, operatorName);
+      setTransferList(res.data);
+      return;
+    } else if (operatorName && operatorName !== '') {
+      const res = await transferencia.getTransfersByOperator(operatorName);
+      setTransferList(res.data);
+      return;
+    } else if (startTime && endTime) {
+      const res = await transferencia.getTransfersByDate(startTime, endTime);
+      setTransferList(res.data);
+      return;
+    } else {
+      await getTransfers();
       return;
     }
-    if (operatorName && operatorName !== '') {
-      setFilteredList(transferList.filter((item) => item.operador.toUpperCase() === operatorName.toUpperCase() ));
-      return;
-    }
-    if (startTime && endTime) {
-      setFilteredList(transferList.filter((item) => {
-        if (stringToDate(item.data_transferencia) >= stringToDate(startTime) && stringToDate(item.data_transferencia) <= stringToDate(endTime)) return item;
-       }));
-      return;
-    }
-    if (!operatorName || operatorName === '') {
-      setFilteredList(transferList);
-      return;
-    }
+  }
+
+  async function cleanForm () {
+    setStartTime('');
+    setStartTimeError('');
+    setEndTime('');
+    setEndTimeError('');
+    setOperatorName('');
+    setOperatorNameError('');
+    const res = await transferencia.getTransfers();
+    setTransferList(res.data);
   }
 
   function stringToDate (data) {
     return new Date(data);
   }
 
+  useEffect((() => {
+    getTransfers();
+  }), []);
+
   return (
     <div className={ `App${ dark ? '-dark' : '' }` }>
       <div className='header'>
-        <Button type="button" style={ dark ? 'primary-dark' : 'secondary' } onClick={handleThemeChange}>
+        <Button type="button" style={ dark ? 'primary-dark' : 'secondary' } onClick={handleThemeChange} title={`Mudar para tema ${ dark ? 'claro' : 'escuro' }`}>
           { dark ? <BsFillSunFill /> : <BsFillMoonFill /> }
         </Button>
       </div>
       <form onSubmit={ handleSubmit }>
         <div className='form'>
           <div className='inputs'>
-            <Datepicker label="Data de início" dark={ dark } onChange={ (value, e) => { handleStartTime(value, e) } } max={ Date.now() } value={ startTime }/>
-            <Datepicker label="Data de fim" dark={ dark } onChange={ (value, e) => { handleEndTime(value, e) } } max={ Date.now() } value={ endTime } />
+            <Datepicker label="Data de início" dark={ dark } onChange={ (value, e) => { handleStartTime(value, e) } } max={ Date.now() } value={ startTime } error={ startTimeError }/>
+            <Datepicker label="Data de fim" dark={ dark } onChange={ (value, e) => { handleEndTime(value, e) } } max={ Date.now() } value={ endTime } error={ endTimeError }/>
             <TextBox label="Nome do operador" dark={ dark } onChange={handleOperatorName} value={ operatorName } error={ operatorNameError }/>
           </div>
           <div className='buttons'>
-            <Button type="submit" style="primary" dark={ dark }>
+            <Button type="submit" style="primary" dark={ dark } title="Pesquisar">
               <AiOutlineSearch />
+            </Button>
+            <Button type="button" style="secondary" dark={ dark } title="Limpar" onClick={ cleanForm }>
+              <AiOutlineClose />
             </Button>
           </div>
         </div>
       </form>
       <div className='divider'>{/* Divider */}</div>
       {
-        filteredList && filteredList.length > 0 ?
+        transferList && transferList.length > 0 ?
           <Table dark={ dark } headers={["Data", "Valor", "Tipo", "Operador"]}>
-            { filteredList.map( (item) => {
+            { transferList.map( (item) => {
               return(
-                <TableRow dark={ dark }>
-                  <TableCell>{stringToDate(item.data_transferencia).toLocaleString()}</TableCell>
+                <TableRow dark={ dark } key={ item.id }>
+                  <TableCell>{stringToDate(item.dataTransferencia).toLocaleString()}</TableCell>
                   <TableCell>R${item.valor.toLocaleString().replaceAll("-", "")}</TableCell>
                   <TableCell>{item.tipo}</TableCell>
-                  <TableCell>{item.operador}</TableCell>
+                  <TableCell>{item.nomeOperadorTransacao}</TableCell>
                 </TableRow>
               );
             } ) }
           </Table>
         :
-          null
+          <div className='no-results'>
+            <span>Nenhum resultado encontrado</span>
+          </div>
       }
     </div>
   );

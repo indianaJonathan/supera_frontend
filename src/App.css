@@ -57,15 +57,16 @@
 }
 
 .divider {
-  min-height: 1px;
   background-color: #444444;
-  margin: 0rem 35rem;
+  margin: 0px auto;
+  min-height: 1px;
+  min-width: 50rem;
 }
 
-.table-item {
-  cursor: pointer;
-}
-
-.table-item:hover {
-  background-color: #FFFFFF;
+.no-results {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 3rem 5rem;
 }
