@@ -63,10 +63,27 @@
   min-width: 50rem;
 }
 
-.no-results {
+.no-results, .no-results-dark {
   align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding: 3rem 5rem;
+}
+
+.no-results {
+  color: #111111;
+}
+
+.no-results-dark {
+  color: #DDDDDD;
+}
+
+.cards {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
 }

@@ -1,0 +1,26 @@
+.card, .card-dark {
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    font-size: 1.1rem;
+    gap: 1rem;
+    padding: 1rem;
+    width: fit-content;
+}
+
+.card {
+    background-color: #FE8700;
+}
+
+.card-dark {
+    background-color: #FFB561;
+}
+
+.card-label {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.card-value {
+    color: #333333;
+}

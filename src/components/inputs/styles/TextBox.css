@@ -22,15 +22,20 @@
 
 .textbox-area, .textbox-area-dark {
     border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
     padding: 3px 5px;
 }
 
 .textbox-area {
     background-color: #EEEEEE;
+    color: #444444;
 }
 
 .textbox-area-dark {
     background-color: #444444;
+    color: #EEEEEE;
 }
 
 .textbox-input, .textbox-input-dark {
@@ -56,4 +61,23 @@
 .textbox-error-text {
     color: #DD0000;
     font-size: 0.8rem;
+}
+
+.clean-button-area {
+    min-width: 1rem;
+    min-height: 1rem;
+}
+
+.clean-button, .clean-button-dark {
+    background-color: rgba(0,0,0,0);
+    border: none;
+    cursor: pointer;
+}
+
+.clean-button {
+    color: #111111;
+}
+
+.clean-button-dark {
+    color: #DDDDDD;
 }
